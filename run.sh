@@ -1,5 +1,9 @@
 #!/bin/bash
 cargo build --release
+ext=$?
+if [[ $ext -ne 0 ]]; then
+		exit $ext
+fi
 sudo setcap CAP_NET_ADMIN=eip ./target/release/crusty-rusty-tcp
 ./target/release/crusty-rusty-tcp &
 pid=$!
